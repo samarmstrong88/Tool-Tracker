@@ -1,0 +1,16 @@
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+#node_modules in both folders
+node_modules/
+node_modules/*
+backend/node_modules
+frontend/node_modules
+
+#DB Dump
+dump/*
+
+#env variables
+.env

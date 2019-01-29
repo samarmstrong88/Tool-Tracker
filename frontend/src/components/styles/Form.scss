@@ -1,0 +1,15 @@
+
+
+.fieldset {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: start;
+  padding: 2rem;
+
+
+
+
+  input, textarea {
+    width: 100%;
+  }
+}

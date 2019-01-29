@@ -1,0 +1,36 @@
+.JobCard {
+  /* background-color:rgba(255,255,255,0.7); */
+  /* border-bottom: 0.5px solid lightgrey;
+  border-top: 0.5px solid grey; */
+  margin: 0 auto;
+  padding: 10px 20px 0px;
+}
+
+.JobCard::after {
+  display: block;
+  content: '';
+  margin: 10px auto 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(to bottom, #969696, #c3c3c3);
+  border-radius: 10%;
+}
+
+.Title {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  /* justify-items: stretch; */
+  background-color:#fafafa;
+  margin: 20px 0;
+  padding: 10px;
+
+}
+
+.Name {
+  text-align: right;
+}
+
+.Number {
+  text-align: left;
+}

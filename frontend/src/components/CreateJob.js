@@ -10,6 +10,8 @@ class CreateJob extends Component {
     start_date: '',
     status: '',
     category: '',
+    clients: [],
+    last_job: {},
   };
 
   handleSubmit = async () => {
@@ -42,6 +44,23 @@ class CreateJob extends Component {
     this.setState({ [name]: value });
   };
 
+  getClients = async () => {
+    const clients_raw = await fetch('/api/clients?filter=name');
+    const clients = await clients_raw.json();
+    this.setState({ clients });
+  };
+
+  getJobsData = async () => {
+    const last_job_raw = await fetch('/api/jobs/last');
+    const last_job = await last_job_raw.json();
+    this.setState({ last_job, job_no: last_job.job_no + 1 });
+  };
+
+  componentDidMount() {
+    this.getClients();
+    this.getJobsData();
+  }
+
   render() {
     return (
       <form
@@ -56,25 +75,29 @@ class CreateJob extends Component {
             Job number
             <input
               type="number"
-              placeholder="1234"
               id="job_no"
               name="job_no"
+              placeholder={this.state.last_job.job_no || 0 + 1}
               required
-              value={this.state.number}
+              value={this.state.job_no}
               onChange={this.handleChange}
             />
           </label>
 
           <label htmlFor="client">
             Client
-            <input //
-              type="text"
+            <select
               id="client"
               name="client"
-              required
               value={this.state.client}
               onChange={this.handleChange}
-            />
+            >
+              {this.state.clients.map(client => (
+                <option value={client._id} key={client._id}>
+                  {client.name}
+                </option>
+              ))}
+            </select>
           </label>
 
           <label htmlFor="brand">

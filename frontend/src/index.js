@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import store from './store';
 import JobsContainer from './components/JobsContainer';
+import JobContainer from './components/JobContainer';
 import Header from './components/Header';
 import CreateJob from './components/CreateJob';
 import CreateClient from './components/CreateClient';
@@ -23,6 +24,7 @@ export default class App extends Component {
                 <Route path="/" exact component={JobsContainer} />
                 <Route path="/createjob/" component={CreateJob} />
                 <Route path="/createclient/" component={CreateClient} />
+                <Route path="/jobs/:job_no" component={JobContainer} />
               </React.Fragment>
             </Inner>
           </Router>

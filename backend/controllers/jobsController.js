@@ -1,7 +1,14 @@
 const mongoose = require('mongoose');
-const Job = mongoose.model('Job');
-const Client = mongoose.model('Client');
+const Job = require('../models/job');
+const Client = require('../models/client');
 
+exports.getJob = async (req, res) => {
+  let query = Job.findOne({job_no: req.params.job_no}).populate('client', 'name');
+  job = await query.exec();
+  //todo fetch the labour enum and add it in with the job
+  res.setHeader('Content-Type', 'application/json');
+  res.json(job);
+}
 
 exports.getJobs = async (req, res) => {
   const allJobs = await Job.find({}, (err, obj) => {
@@ -9,6 +16,13 @@ exports.getJobs = async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.json(obj);
   })
+}
+
+exports.getLastJob = async (req, res) => {
+  const lastJob = await Job.find({}).sort({'_id': -1}).limit(1);
+  // if (res.err) console.log(err);
+  res.setHeader('Content-Type', 'application/json');
+  res.json(lastJob[0]);
 }
 
 exports.addJob = async (req, res) => {

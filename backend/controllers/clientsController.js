@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
-const Job = mongoose.model('Job');
-const Client = mongoose.model('Client');
+const Job = require('../models/job');
+const Client = require('../models/client');
 
 exports.addClient = async (req, res) => {
-  console.log(req.body.name);
-
-  var client = new Client({
+  const client = new Client({
     name: req.body.name,
     email: req.body.email,
     phone: req.body.phone,
@@ -18,4 +16,22 @@ exports.addClient = async (req, res) => {
 
   res.setHeader('Content-Type', 'application/json');
     res.json('');
+}
+
+exports.getAllClientNames= async (req, res) => {
+  const clientNames = await Client.find({}).select('name');
+  res.setHeader('Content-Type', 'application/json');
+    res.json(clientNames);
+}
+
+exports.getClients = async (req, res) => {
+  let query = Client.find({});
+
+  if (req.query.filter) {
+    query.select(req.query.filter)
+  }
+  response = await query.exec();
+  
+  res.setHeader('Content-Type', 'application/json');
+    res.json(response);
 }

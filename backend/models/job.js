@@ -2,15 +2,9 @@ var mongoose = require('mongoose');
 
 var Schema  = mongoose.Schema;
 
+var labour_types = ['Warranty Labour', 'Standard Labour', 'Quote'];
 
-var timeSheetsSchema = new Schema(
-  {
-    labour_type: {type: String, enum: ['Warranty Labour', 'Standard Labour', 'Quote']},
-    time_spent: {type: Number}, //time in minutes
-    notes: {type: String},
-    
-  }
-);
+
 var JobSchema = new Schema(
   {
     job_no: {type: Number, required: true, index: {unique: true}},
@@ -23,7 +17,11 @@ var JobSchema = new Schema(
     category: {type: String, required: true},
     status: {type: String},
     description: {type: String},
-    timesheets: [timeSheetsSchema],
+    timesheets: [{
+      labourType: {type: String, enum: labour_types}, // enumerated to fill out the <select>
+      labourTime: {type: Number}, //time in minutes
+      labourNotes: {type: String},
+    }],
   }
 );
 
@@ -32,5 +30,11 @@ JobSchema
   .get(() => {
     return '/api/jobs' + this.job_no;
   });
+
+  // UserSchema
+  // .virtual('labour_types')
+  // .get(() => {
+  //   return labour_types;
+  // )
 
   module.exports = mongoose.model('Job', JobSchema);

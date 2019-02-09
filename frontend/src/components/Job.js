@@ -1,21 +1,27 @@
 import React from 'react';
 import Timesheet from './Timesheet';
+import CreateTimesheet from './CreateTimesheet';
 
 const Job = props => {
-  const start_date = new Date(props.job.start_date);
+  const { labour_types, job } = props;
+
+  const startDate = new Date(job.start_date);
 
   return (
     <div className="job">
       <h2>Job Overview</h2>
-      <h3>{props.job.job_no}</h3>
-      {/* <h2>{props.job.client}</h2> */}
-      <p>Start Date: {start_date.toLocaleDateString()}</p>
-      <p>Brand: {props.job.brand}</p>
-      <p>Model: {props.job.model}</p>
-      <p>Job category: {props.job.category}</p>
-      <p>Status: {props.job.status}</p>
+      <h3>{job.job_no}</h3>
+      {/* <h2>{job.client}</h2> */}
+      <p>Start Date: {startDate.toLocaleDateString()}</p>
+      <p>Brand: {job.brand}</p>
+      <p>Model: {job.model}</p>
+      <p>Job category: {job.category}</p>
+      <p>Status: {job.status}</p>
 
-      <Timesheet job={props.job} />
+      {job.timesheets &&
+        job.timesheets.map(timesheet => <Timesheet timesheet={timesheet} />)}
+
+      <CreateTimesheet job={props.job} labourTypes={labour_types} />
     </div>
   );
 };

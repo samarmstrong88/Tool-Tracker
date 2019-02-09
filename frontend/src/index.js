@@ -1,3 +1,4 @@
+import '@babel/polyfill'; // Required for jest to be able to parse ES6+ code
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -34,4 +35,9 @@ export default class App extends Component {
   }
 }
 
-render(<App />, document.getElementById('root'));
+render(
+  <App />,
+  // Render to <root> if it's available, or create a <div> if it isnt.
+  // <root> will be available if built/devserver and <div> will be created to test
+  document.getElementById('root') || document.createElement('div')
+);

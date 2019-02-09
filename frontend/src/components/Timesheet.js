@@ -1,15 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Timesheet extends Component {
-  render() {
-    return (
-      <div>
-        <h3>New timesheet</h3>
-        <textarea />
-        <button>Submit</button>
-      </div>
-    );
-  }
-}
+const Timesheet = ({ timesheet }) => (
+  <div>
+    <h3> {timesheet.labourType} </h3>
+    <p> {timesheet.labourTime} </p>
+    <p> {timesheet.labourNotes} </p>
+  </div>
+);
 
 export default Timesheet;

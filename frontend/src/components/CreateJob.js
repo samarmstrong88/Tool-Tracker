@@ -14,7 +14,21 @@ class CreateJob extends Component {
     last_job: {},
   };
 
+  componentDidMount() {
+    this.getClients();
+    this.getJobsData();
+  }
+
   handleSubmit = async () => {
+    const {
+      job_no,
+      client,
+      brand,
+      model,
+      start_date,
+      status,
+      category,
+    } = this.state;
     const post_url = '/api/jobs/add';
     const post_config = {
       method: 'POST',
@@ -22,14 +36,15 @@ class CreateJob extends Component {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
+
       body: JSON.stringify({
-        job_no: this.state.job_no,
-        client: this.state.client,
-        brand: this.state.brand,
-        model: this.state.model,
-        start_date: this.state.start_date,
-        status: this.state.status,
-        category: this.state.category,
+        job_no,
+        client,
+        brand,
+        model,
+        start_date,
+        status,
+        category,
       }),
     };
     const res = await fetch(post_url, post_config);
@@ -55,11 +70,6 @@ class CreateJob extends Component {
     const last_job = await last_job_raw.json();
     this.setState({ last_job, job_no: last_job.job_no + 1 });
   };
-
-  componentDidMount() {
-    this.getClients();
-    this.getJobsData();
-  }
 
   render() {
     return (

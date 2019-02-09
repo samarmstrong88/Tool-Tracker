@@ -10,6 +10,15 @@ exports.getJob = async (req, res) => {
   res.json(job);
 }
 
+exports.addTimesheet = async (req, res) => {
+  Job.findOne({job_no: req.params.job_no}, (err, job) => {
+    console.log(job);
+    if (err) console.log(err)
+    job.timesheets.push(req.body)
+    job.save();
+  })
+}
+
 exports.getJobs = async (req, res) => {
   const allJobs = await Job.find({}, (err, obj) => {
     if (err) console.log(err);
@@ -25,9 +34,16 @@ exports.getLastJob = async (req, res) => {
   res.json(lastJob[0]);
 }
 
+exports.getLabourTypes =  (req, res) => {
+  const labourTypes = Job.schema.path('timesheets').schema.path('labourType').enumValues;
+  // console.log(labourTypes);
+  res.setHeader('Content-Type', 'application/json');
+res.json(labourTypes);
+}
+
 exports.addJob = async (req, res) => {
-  console.log('firing job add');
-  console.log(req.body.client);
+  // console.log('firing job add');
+  // console.log(req.body.client);
 
   Client.findById(req.body.client, (err, client) => {
     if (err) console.log(err);

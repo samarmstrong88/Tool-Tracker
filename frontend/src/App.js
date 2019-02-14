@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import store from './store';
+
 import JobsContainer from './components/JobsContainer';
 import JobContainer from './components/JobContainer';
 import Header from './components/Header';
@@ -12,24 +13,29 @@ import CreateJob from './components/CreateJob';
 import CreateClient from './components/CreateClient';
 import Inner from './components/Inner';
 import styles from './components/styles/root.scss';
+import Startup from './components/Startup';
+import Client from './components/Client.js';
 
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className={styles.wrapper}>
-          <Header />
-          <Router>
-            <Inner>
-              <React.Fragment>
-                <Route path="/" exact component={JobsContainer} />
-                <Route path="/createjob/" component={CreateJob} />
-                <Route path="/createclient/" component={CreateClient} />
-                <Route path="/jobs/:job_no" component={JobContainer} />
-              </React.Fragment>
-            </Inner>
-          </Router>
-        </div>
+        <Startup>
+          <div className={styles.wrapper}>
+            <Router>
+              <>
+                <Header />
+                <Inner>
+                  <Route path="/" exact component={JobsContainer} />
+                  <Route path="/createjob/" component={CreateJob} />
+                  <Route path="/createclient/" component={CreateClient} />
+                  <Route path="/jobs/:job_no" component={JobContainer} />
+                  <Route path="/clients/:clientId" component={Client} />
+                </Inner>
+              </>
+            </Router>
+          </div>
+        </Startup>
       </Provider>
     );
   }
@@ -38,6 +44,6 @@ export default class App extends Component {
 render(
   <App />,
   // Render to <root> if it's available, or create a <div> if it isnt.
-  // <root> will be available if built/devserver and <div> will be created to test
+  // <root> will be available if built/devserver and <div> will be created to test w/ jest
   document.getElementById('root') || document.createElement('div')
 );

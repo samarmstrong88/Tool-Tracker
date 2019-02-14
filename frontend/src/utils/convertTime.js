@@ -15,4 +15,10 @@ const convertTime = timeString => {
   return 0;
 };
 
+export const displayTime = timeInt => {
+  const hours = Math.floor(timeInt / 60);
+  const mins = timeInt % 60;
+  return `${hours}:${mins < 10 ? '0' + mins : mins}`;
+};
+
 export default convertTime;

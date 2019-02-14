@@ -12,15 +12,27 @@ exports.getJob = async (req, res) => {
 
 exports.addTimesheet = async (req, res) => {
   Job.findOne({job_no: req.params.job_no}, (err, job) => {
-    console.log(job);
     if (err) console.log(err)
     job.timesheets.push(req.body)
     job.save();
+    res.status(201).send('Created Timesheet');
   })
 }
 
+exports.deleteTimesheet = async (req, res) => {
+  //pull/delete the timesheet with id: _id on job with job_no:job_no
+  Job.update({'job_no': req.params.job_no}, {$pull: {'timesheets': {'_id': req.params.timesheetId}}}, 
+  (err, result) => {
+    if (err) console.log(err);
+    res.setHeader('Content-Type', 'application/json');
+    res.json(result);
+  }
+  );
+
+}
+
 exports.getJobs = async (req, res) => {
-  const allJobs = await Job.find({}, (err, obj) => {
+  const allJobs = await Job.find({}).populate('client').exec((err, obj) => {
     if (err) console.log(err);
     res.setHeader('Content-Type', 'application/json');
     res.json(obj);

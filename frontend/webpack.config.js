@@ -2,13 +2,12 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 require('@babel/polyfill');
 
 module.exports = {
-  entry: ['@babel/polyfill', './index.js'],
+  entry: ['@babel/polyfill', './App.js'],
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),

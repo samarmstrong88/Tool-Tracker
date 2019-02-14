@@ -9,9 +9,6 @@ const defaultState = {
     status_filter: [],
     cat_filter: 'all',
   },
-  testFilter: {
-    name: 'sam',
-  },
 };
 
 const middleWare = [thunk.default];

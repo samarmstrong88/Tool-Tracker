@@ -84,7 +84,7 @@ class CreateClient extends Component {
               onChange={this.handleChange}
             />
           </label>
-          <button type="submit">Sumbit</button>
+          <button type="submit">Submit</button>
         </fieldset>
       </form>
     );

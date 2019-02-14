@@ -1,24 +1,24 @@
 const initalRequestJobsState = {
-  jobRequestLoading: false,
-  jobRequestError: {},
-  jobRequestData: [],
+  jobsRequestLoading: false,
+  jobsRequestError: {},
+  jobs: [],
 };
 
 const jobs = (state = initalRequestJobsState, action) => {
   switch (action.type) {
     case 'JOBS_REQUEST_IN_PROGRESS':
-      return { ...state, jobRequestLoading: true };
+      return { ...state, jobsRequestLoading: true };
     case 'JOBS_REQUEST_ERROR':
       return {
         ...state,
-        jobRequestLoading: false,
-        jobRequestError: action.error,
+        jobsRequestLoading: false,
+        jobsRequestError: action.error,
       };
     case 'JOBS_REQUEST_SUCCESS':
       return {
         ...state,
-        jobRequestLoading: false,
-        jobRequestData: action.jobRequestData,
+        jobsRequestLoading: false,
+        jobs: action.jobs,
       };
     default:
       return state;

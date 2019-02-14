@@ -14,13 +14,14 @@ class CreateTimesheet extends Component {
   };
 
   handleSubmit = async () => {
+    const job = this.props.job.jobData;
     const timesheetData = {
       ...this.state,
       labourTime: convertTime(this.state.labourTime),
     };
     console.log(timesheetData);
 
-    const postUrl = `/api/job/${this.props.job.job_no}/addTimesheet`;
+    const postUrl = `/api/job/${job.job_no}/addTimesheet`;
     const postConfig = {
       method: 'POST',
       headers: {
@@ -32,9 +33,13 @@ class CreateTimesheet extends Component {
 
     const res = await fetch(postUrl, postConfig);
     if (res.ok) {
-      // return json
-      return res;
+      this.props.requestJob(job.job_no);
     }
+    this.setState({
+      labourType: 'Standard Labour',
+      labourTime: '0:00',
+      labourNotes: '',
+    });
   };
 
   render() {

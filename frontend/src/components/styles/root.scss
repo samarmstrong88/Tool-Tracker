@@ -1,7 +1,21 @@
+@import 'themes';
 
-.wrapper {
-  text-align: center;
+html {
+  font-size: 62.5%;
+  
   min-height: 100vh;
-  font-family: roboto, sans-serif;
-  background-color: #fafafa;
+  // font-family: roboto, sans-serif;
 }
+body {
+  // background-color: $extralightgrey;
+  background: linear-gradient($extralightgrey, $lightgrey);
+  font-family: 'Poppins', sans-serif;
+  h1, h2, h3, h4, h5 {
+    font-family: 'Titillium Web', sans-serif;
+  }
+  button, input, textarea, select, option {
+    font-family: 'Poppins', sans-serif;
+  } 
+}
+// font-family: 'Roboto Slab', serif;
+// font-family: 'Titillium Web', sans-serif;

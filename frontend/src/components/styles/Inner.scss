@@ -1,8 +1,14 @@
+@import 'themes';
+
 .Inner {
-  padding-top: 3rem;
+
   margin: 0 auto;
   max-width: 1000px;
-  background-color: #fafafa;
   position: relative;
-  z-index: 1
+  z-index: 1;
+  font-size: 1.5rem;
+  
+  &> * {
+    border-radius: 4px;
+  }
 }

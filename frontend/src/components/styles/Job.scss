@@ -1,0 +1,30 @@
+@import 'themes';
+@import 'card';
+
+.JobDescription {
+  
+  display: grid;
+  grid-template-columns: repeat(2, max-content 1fr);
+  justify-items: start;
+  padding: 2rem;
+  
+
+  dt, dd{
+    padding: 5px 10px;
+  }
+}
+
+.JobOverview, .TimeSheets {
+  @include card;
+}
+
+.TimesheetGrid {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  align-items: baseline;
+  grid-gap: 2rem;
+  margin-top: 1rem;
+}
+
+
+

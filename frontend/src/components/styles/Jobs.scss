@@ -1,13 +1,18 @@
-
+@import 'themes';
 
 
 
 .list {
-  grid-area: content;
-  background-color: #fafafa;
+
+
 
 }
 
+.container {
+  background-color: $white;
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
 
 
 

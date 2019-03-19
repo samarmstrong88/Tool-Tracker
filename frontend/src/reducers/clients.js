@@ -6,15 +6,15 @@ const initalRequestClientsState = {
 
 const clients = (state = initalRequestClientsState, action) => {
   switch (action.type) {
-    case 'CLIENT_REQUEST_IN_PROGRESS':
+    case 'CLIENTS_REQUEST_IN_PROGRESS':
       return { ...state, clientsRequestLoading: true };
-    case 'CLIENT_REQUEST_ERROR':
+    case 'CLIENTS_REQUEST_ERROR':
       return {
         ...state,
         clientsRequestLoading: false,
         clientsRequestError: action.error,
       };
-    case 'CLIENT_REQUEST_SUCCESS':
+    case 'CLIENTS_REQUEST_SUCCESS':
       return {
         ...state,
         clientsRequestLoading: false,

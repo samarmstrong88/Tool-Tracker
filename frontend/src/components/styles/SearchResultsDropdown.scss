@@ -1,5 +1,43 @@
+@import 'themes';
+
 .dropdown {
   position: absolute;
-  background-color: #ff091d;
-  width: 100%;
+  min-width: 100%;
+  white-space: nowrap;
+  right:0;
+  top: 3rem;
+  background-color: $extralightgrey;
+  border: 1px solid $darkgrey;
+  border-radius: 5px;
+  
+  font-size: 1.5rem;
+
+  li {
+    margin: 0.5rem 0.5rem;
+    list-style-type: none;
+    border-bottom: 1px solid $lightgrey;
+    padding: 1rem;
+    text-align: left;
+    background-color: $white;
+    border-radius: 0.4rem;
+    border: 1px solid $midgrey;
+
+   
+    a {
+      text-decoration: none;
+      color: $linkBlue;
+    }
+    h3, p {display: inline;}
+  }
 }
+
+.job, .client{
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  grid-gap: 0.5rem;
+
+}
+
+
+

@@ -1,15 +1,21 @@
-
-
-.fieldset {
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-items: start;
-  padding: 2rem;
-
-
-
-
-  input, textarea, select, option {
-    width: 100%;
+  fieldset {
+    padding: 2rem;
+    display: flex;
+    align-items: flex-start;
+  
+    label {
+      text-align: left;
+      display: block;
+  
+    }
+  
+  
+    input, textarea, select, option {
+      margin: 0.5rem;
+      display: block;
+    
+    }
+    textarea {
+      width: 100%;
+    }
   }
-}

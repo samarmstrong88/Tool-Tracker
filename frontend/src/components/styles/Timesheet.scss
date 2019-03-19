@@ -1,0 +1,20 @@
+@import 'themes';
+@import '_buttons';
+
+.Timesheet {
+  display: contents;
+  // justify-content: space-between;
+  // align-items: flex-start;
+
+  button {
+    @include buttons;
+  }
+
+
+
+  .DeleteButton {
+    @include deleteButton;
+    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
+  }
+}

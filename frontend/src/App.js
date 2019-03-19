@@ -12,25 +12,25 @@ import Header from './components/Header';
 import CreateJob from './components/CreateJob';
 import CreateClient from './components/CreateClient';
 import Inner from './components/Inner';
-import styles from './components/styles/root.scss';
+import './components/styles/root.scss';
 import Startup from './components/Startup';
-import Client from './components/Client.js';
+import ClientContainer from './components/ClientContainer.js';
 
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <Startup>
-          <div className={styles.wrapper}>
+          <div>
             <Router>
               <>
                 <Header />
                 <Inner>
-                  <Route path="/" exact component={JobsContainer} />
+                  <Route path="/(|jobs)" exact component={JobsContainer} />
                   <Route path="/createjob/" component={CreateJob} />
                   <Route path="/createclient/" component={CreateClient} />
                   <Route path="/jobs/:job_no" component={JobContainer} />
-                  <Route path="/clients/:clientId" component={Client} />
+                  <Route path="/clients/:clientId" component={ClientContainer} />
                 </Inner>
               </>
             </Router>

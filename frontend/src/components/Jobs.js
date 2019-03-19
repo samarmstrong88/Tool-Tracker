@@ -6,12 +6,8 @@ import FilterBar from './FilterBar';
 import JobsList from './JobsList';
 
 class Jobs extends Component {
-  constructor(props) {
-    super(props);
 
-    this.handleStatusChange = this.handleStatusChange.bind(this);
-    this.handleCategoryChange = this.handleCategoryChange.bind(this);
-
+  componentDidMount() {
     this.state = {
       jobData: [],
       selectedCategory: 'Warranty',
@@ -19,16 +15,7 @@ class Jobs extends Component {
     };
   }
 
-  componentDidMount() {
-    // fetch('http://etstooltracker.qwugpm3akq.us-east-1.elasticbeanstalk.com/job/all')
-    // fetch('/job/all')
-    //   .then(res => res.json())
-    //   .then(res => this.setState({ jobData: res }))
-    // .then(console.log(this.state.jobData))
-    this.props.requestJobs();
-  }
-
-  handleStatusChange(e) {
+  handleStatusChange = (e) => {
     const statusList = this.state.statusList;
 
     if (statusList.includes(e.target.value)) {
@@ -41,7 +28,7 @@ class Jobs extends Component {
     }
   }
 
-  handleCategoryChange(e) {
+  handleCategoryChange = (e) =>{
     this.setState({ selectedCategory: e.target.value });
   }
 
@@ -54,27 +41,7 @@ class Jobs extends Component {
           handleCategoryChange={this.props.updateJobCatFilters}
         />
         <JobsList {...this.props} />
-        {/* <div className='ContentArea'>
-          <ul>
-            {this.state.jobData
-              .filter((job) => {
-                if (this.state.selectedCategory === 'all') return true;
-                if (job.category === this.state.selectedCategory) return true;
-                else return false
-
-              })
-              .filter((job) => {
-                if (this.state.statusList.length === 0) return true;
-                if (this.state.statusList.includes(job.status)) return true
-                return false;
-              })
-              .sort((a, b) => b.job_no - a.job_no)
-              .map((job, key) => {
-                return <JobCard jobCardData={job} key={job._id} />
-              }
-              )}
-          </ul>
-        </div> */}
+      
       </div>
     );
   }

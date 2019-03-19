@@ -1,0 +1,16 @@
+@import 'themes';
+
+.Pagination {
+  button {
+    margin: 5px;
+    background: none;
+    border: none;
+    
+
+    &:enabled{
+      color: $linkBlue;
+      font-weight: bolder;
+      cursor: pointer;
+    }
+  }
+}

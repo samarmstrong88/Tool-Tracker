@@ -1,0 +1,6 @@
+@import 'themes';
+@import 'card';
+
+.Client {
+  @include card
+}

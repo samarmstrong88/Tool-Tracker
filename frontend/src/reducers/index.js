@@ -7,6 +7,7 @@ import testFilter from './testFilter';
 import jobs from './jobs';
 import job from './job';
 import clients from './clients';
+import client from './client';
 
 const rootReducer = combineReducers({
   jobFilters,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   jobs,
   job,
   clients,
+  client,
 }); // same as jobFilters: jobFilters...
 
 // export the rootReducer

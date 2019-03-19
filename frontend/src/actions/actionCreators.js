@@ -28,20 +28,20 @@ export function requestJobs() {
   };
 }
 
-export function requestJobsInProgress() {
+function requestJobsInProgress() {
   return {
     type: 'JOBS_REQUEST_IN_PROGRESS',
   };
 }
 
-export function requestJobsError(error) {
+function requestJobsError(error) {
   return {
     type: 'JOBS_REQUEST_ERROR',
     error,
   };
 }
 
-export function requestJobsSuccess(jobs) {
+function requestJobsSuccess(jobs) {
   return {
     type: 'JOBS_REQUEST_SUCCESS',
     jobs,
@@ -67,20 +67,20 @@ export function requestJob(jobNo) {
     }
   };
 }
-export function requestJobInProgress() {
+function requestJobInProgress() {
   return {
     type: 'JOB_REQUEST_IN_PROGRESS',
   };
 }
 
-export function requestJobError(error) {
+function requestJobError(error) {
   return {
     type: 'JOB_REQUEST_ERROR',
     error,
   };
 }
 
-export function requestJobSuccess(jobRequestData) {
+function requestJobSuccess(jobRequestData) {
   return {
     type: 'JOB_REQUEST_SUCCESS',
     jobRequestData,
@@ -101,22 +101,57 @@ export function requestClients() {
     }
   };
 }
-export function requestClientsInProgress() {
+function requestClientsInProgress() {
+  return {
+    type: 'CLIENTS_REQUEST_IN_PROGRESS',
+  };
+}
+
+function requestClientsError(error) {
+  return {
+    type: 'CLIENTS_REQUEST_ERROR',
+    error,
+  };
+}
+
+function requestClientsSuccess(clients) {
+  return {
+    type: 'CLIENTS_REQUEST_SUCCESS',
+    clients,
+  };
+}
+
+
+
+export function requestClient(clientId) {
+  const clientFetchUrl = `/api/clients/${clientId}`;
+  return async dispatch => {
+    dispatch(requestClientInProgress());
+    try {
+      const clientResponse = await fetch(clientFetchUrl);
+      const client = await clientResponse.json();
+      dispatch(requestClientSuccess(client));
+    } catch (e) {
+      dispatch(requestClientError(e));
+    }
+  };
+}
+ function requestClientInProgress() {
   return {
     type: 'CLIENT_REQUEST_IN_PROGRESS',
   };
 }
 
-export function requestClientsError(error) {
+ function requestClientError(error) {
   return {
     type: 'CLIENT_REQUEST_ERROR',
     error,
   };
 }
 
-export function requestClientsSuccess(clients) {
+ function requestClientSuccess(client) {
   return {
     type: 'CLIENT_REQUEST_SUCCESS',
-    clients,
+    client,
   };
 }

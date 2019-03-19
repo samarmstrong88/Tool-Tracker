@@ -1,0 +1,40 @@
+
+
+ @mixin buttons { 
+  padding: 0.5rem 2rem;
+  color: $linkBlue;
+  border: 2px solid $linkBlue;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  background-color: $white;
+  font-weight: bolder;
+  text-transform: uppercase;
+
+  transition: border-color 0.2s ease-in-out, background 0.2s ease-in-out, color 0.2s ease-in-out;
+
+  &:hover, &:focus{
+    background-color: $linkBlue;
+    color: $white;
+    border: 2px solid $linkBlue;
+    outline: none;  
+  }
+  &:active {
+    transform: translateY(2px);
+
+  }
+}
+
+  @mixin deleteButton {
+    @include buttons;
+    border: 2px solid $deleteRed;
+    color: $deleteRed;
+    background-color: $white;
+  
+    &:hover, &:focus {
+      color: $white;
+      background-color: $deleteRed;
+      border: 2px solid $deleteRed;
+    }
+
+  }
+

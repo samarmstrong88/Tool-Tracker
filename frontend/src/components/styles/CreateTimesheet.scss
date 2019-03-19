@@ -1,0 +1,85 @@
+@import 'themes';
+@import '_buttons';
+
+.CreateTimesheet {
+  background-color: $lightgrey;
+  margin: 2rem 0;
+  padding: 0.5rem 2rem ;
+  border: 1px solid $midgrey;
+  border-radius: 3px;
+
+  h3 {
+    cursor: pointer;
+  }
+  button {
+    @include buttons;
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    justify-items: start;
+    grid-gap: 1rem;
+    margin: 2rem 0;
+    align-items: center;
+  }
+
+  fieldset {
+    padding: 2rem;
+    border: none;
+    display: contents;
+   
+    
+  
+    label {
+      justify-self: end;
+      font-weight: 500;
+      grid-column: 1 / 2;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: $darkgrey;
+
+    }
+
+    input, textarea, select, option {
+      margin: 0.5rem;
+      display: block;
+      grid-column: 2 / 3;
+      width: auto;
+      border: 1px solid $midgrey;
+      padding: 1rem 1rem;
+      border-radius: 5px;
+     
+
+    }
+    textarea {
+      width: 100%;
+      height: 10rem;
+    } 
+  }
+}
+
+input.numInput {
+  width: 8ch;
+  }
+
+
+
+.AccordionButton {
+  font-weight: 800;
+  font-size: 2rem;
+  margin: 0 1rem;
+  width: 2rem;
+  
+}
+
+.AccordionBar {
+  display: flex;  
+  justify-content: start;
+  align-items: center;
+  cursor: pointer;
+  color: $linkBlue;
+  text-transform: uppercase;
+  
+}

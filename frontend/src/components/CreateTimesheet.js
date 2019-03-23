@@ -39,7 +39,7 @@ class CreateTimesheet extends Component {
     };
     console.log(timesheetData);
 
-    const postUrl = `/api/job/${job.job_no}/addTimesheet`;
+    const postUrl = `${API_URL}/job/${job.job_no}/addTimesheet`;
     const postConfig = {
       method: 'POST',
       headers: {

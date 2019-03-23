@@ -1,0 +1,22 @@
+{
+  "name": "tool_tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-deploy": "git subtree push --prefix backend heroku -r heroku-prod master",
+    "heroku-stage": "git subtree push --prefix backend heroku-staging master"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samarmstrong88/Tool-Tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samarmstrong88/Tool-Tracker/issues"
+  },
+  "homepage": "https://github.com/samarmstrong88/Tool-Tracker#readme"
+}

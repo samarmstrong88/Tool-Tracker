@@ -17,6 +17,11 @@ const dbusername = process.env.DB_USERNAME;
 //initialise the express app
 const app = express();
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 //rquire mongoose, and declare the mongoUri variable, to be assigned in the following for loop
 const mongoose = require('mongoose');
 let mongoUri;
@@ -36,11 +41,6 @@ db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', () => console.log('MongoDB Connected'));
 
 // Serve static files from the React App
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 app.use(express.static(path.join(__dirname, 'client/public')));
 app.use(express.static(path.join(__dirname, 'client/src')));
 app.use(express.static(path.join(__dirname, 'client/build')));

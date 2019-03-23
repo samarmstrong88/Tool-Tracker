@@ -20,7 +20,7 @@ router.delete('/job/:job_no/timesheet/:timesheetId', jobsController.deleteTimesh
 // client get methods
 router.get('/clients/all-by-name', clientsController.getAllClientNames)
 router.get('/clients', clientsController.getClients);
-router.get('./clients/:clientId', clientsController.getClientById);
+router.get('/clients/:clientId', clientsController.getClientById);
 //client post methods
 router.post('/clients/add', clientsController.addClient);
 

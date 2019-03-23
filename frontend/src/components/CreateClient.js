@@ -9,7 +9,7 @@ class CreateClient extends Component {
   };
 
   handleSubmit = async () => {
-    const post_url = '/api/clients/add';
+    const post_url = `${API_URL}/clients/add`;
     const post_config = {
       method: 'POST',
       headers: {

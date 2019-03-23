@@ -29,7 +29,7 @@ class CreateJob extends Component {
       status,
       category,
     } = this.state;
-    const post_url = '/api/jobs/add';
+    const post_url = `${API_URL}/jobs/add`;
     const post_config = {
       method: 'POST',
       headers: {
@@ -60,13 +60,13 @@ class CreateJob extends Component {
   };
 
   getClients = async () => {
-    const clients_raw = await fetch('/api/clients?filter=name');
+    const clients_raw = await fetch(`${API_URL}/clients?filter=name`);
     const clients = await clients_raw.json();
     this.setState({ clients });
   };
 
   getJobsData = async () => {
-    const last_job_raw = await fetch('/api/jobs/last');
+    const last_job_raw = await fetch(`${API_URL}/jobs/last`);
     const last_job = await last_job_raw.json();
     this.setState({ last_job, job_no: last_job.job_no + 1 });
   };

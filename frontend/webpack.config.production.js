@@ -13,35 +13,17 @@ module.exports = {
     publicPath: '/',
   },
   context: path.resolve(__dirname, 'src'),
-  devServer: {
-    contentBase: path.resolve(__dirname, 'public/assets'),
-    stats: 'errors-only',
-    open: false,
-    port: 3000,
-    compress: true,
-    proxy: {
-      API_URL: {
-        target: 'http://localhost:5000/',
-        changeOrigin: true,
-        secure: false,
-        pathRewrite: { '/': '' },
-      },
-    },
-    hot: true,
-    inline: true,
-    historyApiFallback: true,
-  },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['dist']), //removes old dist folder
     new HtmlWebpackPlugin({
-      template: '../public/index.html',
+      template: '../public/index.html', //uses index.html as a template for output html
     }),
-    new MiniCssExtractPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin(), //extracts scss/csss
     new webpack.DefinePlugin({
-      API_URL: JSON.stringify('http://localhost:5000/'),
+      API_URL: JSON.stringify('https://tooltrackerapi.herokuapp.com'),
     }),
   ],
+
   module: {
     rules: [
       {

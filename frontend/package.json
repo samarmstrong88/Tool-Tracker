@@ -6,8 +6,10 @@
   "entry": "App.js",
   "proxy": "http://localhost:5000/",
   "scripts": {
-    "start": "webpack-dev-server --mode development",
-    "build": "webpack",
+    "start": "webpack-dev-server --mode=development --config webpack.config.js",
+    "stage": "webpack-dev-server --mode=production --config webpack.config.stage.js",
+    "build": "webpack --config webpack.config.stage.js",
+    "prod": "webpack -p --config webpack.config.production.js",
     "test": "jest"
   },
   "keywords": [],

@@ -28,7 +28,7 @@ exports.getAllClientNames= async (req, res) => {
 
 // get /clients/:clientId
 exports.getClientById = async (req, res) => {
-  const client = await Client.findOne({_id: req.params.clientId});
+  const client = await Client.findOne({_id: req.params.clientId}).populate('jobs', 'job_no');
   res.json(client);
 }
 

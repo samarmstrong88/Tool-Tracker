@@ -5,6 +5,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 require('@babel/polyfill');
 
+const localPath = 'http://localhost:5000';
+const apiPath = 'https://tooltrackerapi.herokuapp.com';
+// console.log(process.env.NODE_ENV === 'production');
+
 module.exports = {
   entry: ['@babel/polyfill', './App.js'],
   output: {
@@ -39,7 +43,7 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      API_URL: JSON.stringify('http://localhost:5000/'),
+      API_URL: JSON.stringify('https://tooltrackerapi.herokuapp.com'),
     }),
   ],
   module: {

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "devStart": "SET DEBUG=ETS-tool-tracker:* & nodemon start"
+    "devStart": "SET DEBUG=tooltracker:* & nodemon start",
+    "perf": "SET NODE_DEBUG=performance & SET NODE_ENV=stage & nodemon start"
   },
   "nodemonConfig": {
     "ignore": [
@@ -16,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "debug": "^4.1.1",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "mongoose": "^5.2.7",
@@ -30,6 +32,7 @@
     "create-react-app": "^1.5.2",
     "enzyme": "^3.8.0",
     "eslint": "^5.12.1",
-    "eslint-config-prettier": "^4.0.0"
+    "eslint-config-prettier": "^4.0.0",
+    "perf_hooks": "0.0.1"
   }
 }

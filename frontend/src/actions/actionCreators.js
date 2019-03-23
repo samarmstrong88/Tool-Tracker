@@ -1,5 +1,6 @@
 // creator to toggle a job filter on and off
-const jobsFetchUrl = '/api/jobs';
+// const API_URL = _API_URL;
+const jobsFetchUrl = `${API_URL}/jobs`;
 
 export function updateJobStatusFilters(statusFilter) {
   return {
@@ -55,7 +56,7 @@ function requestJobsSuccess(jobs) {
 //    when promise returns or rejects, the state is set to
 //    success, with data or job load error
 export function requestJob(jobNo) {
-  const jobFetchUrl = `/api/job/${jobNo}`;
+  const jobFetchUrl = `${API_URL}/job/${jobNo}`;
   return async dispatch => {
     dispatch(requestJobInProgress());
     try {
@@ -89,7 +90,7 @@ function requestJobSuccess(jobRequestData) {
 
 // To fetch the list of clients and add it to the store
 export function requestClients() {
-  const clientFetchUrl = '/api/clients/';
+  const clientFetchUrl = `${API_URL}/clients/`;
   return async dispatch => {
     dispatch(requestClientsInProgress());
     try {
@@ -124,7 +125,7 @@ function requestClientsSuccess(clients) {
 
 
 export function requestClient(clientId) {
-  const clientFetchUrl = `/api/clients/${clientId}`;
+  const clientFetchUrl = `${API_URL}/clients/${clientId}`;
   return async dispatch => {
     dispatch(requestClientInProgress());
     try {

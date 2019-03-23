@@ -112,7 +112,7 @@
         "singleQuote": true,
         "printWidth": 80
       }
-    ],
+    ]
   },
   "plugins": [
     "html",

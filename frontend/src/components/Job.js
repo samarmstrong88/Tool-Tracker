@@ -10,7 +10,7 @@ class Job extends Component {
   componentDidMount() {
     this.props.requestJob(this.props.match.params.job_no);
     (async () => {
-      const labour_types_raw = await fetch('/api/jobs/labour_types');
+      const labour_types_raw = await fetch(`${API_URL}/jobs/labour_types`);
       const labour_types = await labour_types_raw.json();
       this.setState({ labour_types });
     })();
@@ -28,7 +28,7 @@ class Job extends Component {
 
   deleteTimesheet = async _id => {
     const jobNo = this.props.job.jobData.job_no;
-    const deleteUrl = `/api/job/${jobNo}/timesheet/${_id}`;
+    const deleteUrl = `${API_URL}/job/${jobNo}/timesheet/${_id}`;
     const deleteConfig = {
       method: 'delete',
       // headers: {

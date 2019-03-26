@@ -1,6 +1,10 @@
 // creator to toggle a job filter on and off
 // const API_URL = _API_URL;
+import store from '../store';
+
 const jobsFetchUrl = `${API_URL}/jobs`;
+
+console.log('running');
 
 export function updateJobStatusFilters(statusFilter) {
   return {
@@ -17,14 +21,30 @@ export function updateJobCatFilters(catFilter) {
 }
 
 export function requestJobs() {
+  const token = store.getState().userData.authToken;
   return async dispatch => {
     dispatch(requestJobsInProgress());
-    try {
-      const jobsResponse = await fetch(jobsFetchUrl);
-      const jobs = await jobsResponse.json();
-      dispatch(requestJobsSuccess(jobs));
-    } catch (err) {
-      dispatch(requestJobsError(err));
+
+    if (!token) {
+      dispatch(requestJobsError('You are not logged in'));
+    } else {
+      try {
+        const jobsResponse = await fetch(jobsFetchUrl, {
+          method: 'GET',
+          withCredentials: true,
+          credentials: 'include',
+          headers: {
+            authorization: token,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        });
+        const jobs = await jobsResponse.json();
+        dispatch(requestJobsSuccess(jobs));
+      } catch (err) {
+        console.log(err);
+        dispatch(requestJobsError(err));
+      }
     }
   };
 }
@@ -122,8 +142,6 @@ function requestClientsSuccess(clients) {
   };
 }
 
-
-
 export function requestClient(clientId) {
   const clientFetchUrl = `${API_URL}/clients/${clientId}`;
   return async dispatch => {
@@ -137,22 +155,67 @@ export function requestClient(clientId) {
     }
   };
 }
- function requestClientInProgress() {
+function requestClientInProgress() {
   return {
     type: 'CLIENT_REQUEST_IN_PROGRESS',
   };
 }
 
- function requestClientError(error) {
+function requestClientError(error) {
   return {
     type: 'CLIENT_REQUEST_ERROR',
     error,
   };
 }
 
- function requestClientSuccess(client) {
+function requestClientSuccess(client) {
   return {
     type: 'CLIENT_REQUEST_SUCCESS',
     client,
+  };
+}
+
+export function requestSignIn(email, password) {
+  const signInUrl = `${API_URL}/users/signin`;
+  return async dispatch => {
+    dispatch(requestSignInInProgress());
+    try {
+      const signInResponse = await fetch(signInUrl, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      const responseBody = await signInResponse.json();
+      if (signInResponse.status === 200) {
+        dispatch(requestSignInSuccess(responseBody.token));
+      } else {
+        dispatch(requestSignInError(responseBody));
+      }
+    } catch (err) {
+      console.log(err.message);
+      dispatch(requestSignInError('Error ' + err.message));
+    }
+  };
+}
+function requestSignInInProgress() {
+  return {
+    type: 'SIGNIN_REQUEST_IN_PROGRESS',
+  };
+}
+
+function requestSignInError(error) {
+  return {
+    type: 'SIGNIN_REQUEST_ERROR',
+    error,
+  };
+}
+
+function requestSignInSuccess(token) {
+  return {
+    type: 'SIGNIN_REQUEST_SUCCESS',
+    token,
   };
 }

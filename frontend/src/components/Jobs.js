@@ -6,16 +6,16 @@ import FilterBar from './FilterBar';
 import JobsList from './JobsList';
 
 class Jobs extends Component {
-
   componentDidMount() {
     this.state = {
       jobData: [],
       selectedCategory: 'Warranty',
       statusList: ['to-be-started'],
     };
+    this.props.requestJobs();
   }
 
-  handleStatusChange = (e) => {
+  handleStatusChange = e => {
     const statusList = this.state.statusList;
 
     if (statusList.includes(e.target.value)) {
@@ -26,11 +26,11 @@ class Jobs extends Component {
       statusList.push(e.target.value);
       this.setState({ statusList });
     }
-  }
+  };
 
-  handleCategoryChange = (e) =>{
+  handleCategoryChange = e =>{
     this.setState({ selectedCategory: e.target.value });
-  }
+  };
 
   render() {
     return (
@@ -41,7 +41,6 @@ class Jobs extends Component {
           handleCategoryChange={this.props.updateJobCatFilters}
         />
         <JobsList {...this.props} />
-      
       </div>
     );
   }

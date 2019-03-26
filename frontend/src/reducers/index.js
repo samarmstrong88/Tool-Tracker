@@ -3,20 +3,21 @@ import { combineReducers } from 'redux';
 
 // import reducers to combine
 import jobFilters from './jobFilters';
-import testFilter from './testFilter';
 import jobs from './jobs';
 import job from './job';
 import clients from './clients';
 import client from './client';
+import userData from './signIn';
+import loadingStates from './loadingStates';
 
 const rootReducer = combineReducers({
   jobFilters,
-  testFilter,
   jobs,
   job,
   clients,
   client,
-}); // same as jobFilters: jobFilters...
-
+  userData,
+  loadingStates,
+});
 // export the rootReducer
 export default rootReducer;

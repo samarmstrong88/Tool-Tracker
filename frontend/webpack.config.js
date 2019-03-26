@@ -21,7 +21,7 @@ module.exports = {
     compress: true,
     proxy: {
       API_URL: {
-        target: 'http://localhost:5000/',
+        target: 'http://localhost:5000',
         changeOrigin: true,
         secure: false,
         pathRewrite: { '/': '' },
@@ -39,7 +39,7 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      API_URL: JSON.stringify('http://localhost:5000/'),
+      API_URL: JSON.stringify('http://localhost:5000'),
     }),
   ],
   module: {

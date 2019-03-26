@@ -18,6 +18,7 @@
   "dependencies": {
     "dotenv": "^6.2.0",
     "eslint-plugin-html": "^5.0.0",
+    "jsonwebtoken": "^8.5.1",
     "query-string": "^6.2.0",
     "react": "^16.7.0",
     "react-confirm": "^0.1.18",

@@ -15,6 +15,7 @@ import Inner from './components/Inner';
 import './components/styles/root.scss';
 import Startup from './components/Startup';
 import ClientContainer from './components/ClientContainer.js';
+import SignIn from './components/SignIn';
 
 export default class App extends Component {
   render() {
@@ -30,7 +31,11 @@ export default class App extends Component {
                   <Route path="/createjob/" component={CreateJob} />
                   <Route path="/createclient/" component={CreateClient} />
                   <Route path="/jobs/:job_no" component={JobContainer} />
-                  <Route path="/clients/:clientId" component={ClientContainer} />
+                  <Route
+                    path="/clients/:clientId"
+                    component={ClientContainer}
+                  />
+                  <Route path="/signin/" component={SignIn} />
                 </Inner>
               </>
             </Router>

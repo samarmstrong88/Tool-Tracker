@@ -20,7 +20,7 @@ exports.addClient = async (req, res) => {
 }
 
 // get /clients/all-by-name
-exports.getAllClientNames= async (req, res) => {
+exports.getAllClientNames = async (req, res) => {
   const clientNames = await Client.find({}).select('name');
   res.setHeader('Content-Type', 'application/json');
     res.json(clientNames);

@@ -6,9 +6,7 @@ import { Link } from 'react-router-dom';
 const Header = () => (
   <header className={styles.Header}>
     <div className={styles.header_wrapper}>
-      <Link to="/">
-        <h1 className={styles.h1}>Tool Tracker</h1>
-      </Link>
+      <h1 className={styles.h1}>Tool Tracker</h1>
       <SearchBarContainer />
     </div>
   </header>

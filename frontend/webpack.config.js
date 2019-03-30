@@ -19,6 +19,7 @@ module.exports = {
     open: false,
     port: 3000,
     compress: true,
+    // https: true,
     proxy: {
       API_URL: {
         target: 'http://localhost:5000',

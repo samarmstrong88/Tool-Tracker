@@ -9,7 +9,6 @@ const debuglog = util.debuglog('performance');
 exports.getJob = async (req, res) => {
   let query = Job.findOne({job_no: req.params.job_no}).populate('client', 'name');
   job = await query.exec();
-  //todo fetch the labour enum and add it in with the job
   res.setHeader('Content-Type', 'application/json');
   res.json(job);
 }

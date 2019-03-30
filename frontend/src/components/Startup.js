@@ -9,6 +9,7 @@ class Startup extends Component {
   componentDidMount() {
     this.props.requestJobs();
     this.props.requestClients();
+    this.props.checkLogin();
   }
 
   render() {
@@ -16,9 +17,7 @@ class Startup extends Component {
   }
 }
 
-const mapStateToProps = ({
- jobFilters, testFilter, jobs, clients 
-}) => ({
+const mapStateToProps = ({ jobFilters, testFilter, jobs, clients }) => ({
   jobFilters,
   testFilter,
   jobs,

@@ -16,6 +16,7 @@ import './components/styles/root.scss';
 import Startup from './components/Startup';
 import ClientContainer from './components/ClientContainer.js';
 import SignIn from './components/SignIn';
+import PrivateRoute from './components/PrivateRoute';
 
 export default class App extends Component {
   render() {
@@ -27,11 +28,18 @@ export default class App extends Component {
               <>
                 <Header />
                 <Inner>
-                  <Route path="/(|jobs)" exact component={JobsContainer} />
-                  <Route path="/createjob/" component={CreateJob} />
-                  <Route path="/createclient/" component={CreateClient} />
-                  <Route path="/jobs/:job_no" component={JobContainer} />
-                  <Route
+                  <PrivateRoute
+                    path="/(|jobs)"
+                    exact
+                    component={JobsContainer}
+                  />
+                  <PrivateRoute path="/createjob/" component={CreateJob} />
+                  <PrivateRoute
+                    path="/createclient/"
+                    component={CreateClient}
+                  />
+                  <PrivateRoute path="/jobs/:job_no" component={JobContainer} />
+                  <PrivateRoute
                     path="/clients/:clientId"
                     component={ClientContainer}
                   />

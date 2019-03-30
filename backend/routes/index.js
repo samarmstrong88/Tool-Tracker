@@ -3,6 +3,7 @@ const router = express.Router();
 
 const jobsController = require('../controllers/jobsController');
 const clientsController = require('../controllers/clientsController');
+const usersController = require('../controllers/usersController');
 
 
 //Job get mothods
@@ -23,6 +24,10 @@ router.get('/clients', clientsController.getClients);
 router.get('/clients/:clientId', clientsController.getClientById);
 //client post methods
 router.post('/clients/add', clientsController.addClient);
+
+router.post('/users/create', usersController.createUser);
+router.post('/users/signin', usersController.signIn);
+router.get('/users/me', usersController.me);
 
 
 

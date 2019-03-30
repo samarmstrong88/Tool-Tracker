@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { requestSignIn } from '../actions/actionCreators';
+import { Redirect } from 'react-router-dom';
 
 class SignIn extends Component {
   state = { email: '', password: '' };
@@ -9,6 +9,7 @@ class SignIn extends Component {
   handleSubmit = e => {
     console.log(e.target.email.value, e.target.password.value);
     this.props.requestSignIn(e.target.email.value, e.target.password.value);
+    this.props.history.push('/jobs');
   };
 
   handleChange = e => {
@@ -17,7 +18,9 @@ class SignIn extends Component {
   };
 
   render() {
-    return (
+    return this.props.userData.loggedIn ? (
+      <Redirect to="/jobs" />
+    ) : (
       <div>
         <h3>Sign In</h3>
         <form
@@ -50,8 +53,8 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-function mapStateToProps({ client }) {
-  return { client };
+function mapStateToProps(state) {
+  return state;
 }
 
 export default connect(

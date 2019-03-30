@@ -21,30 +21,21 @@ export function updateJobCatFilters(catFilter) {
 }
 
 export function requestJobs() {
-  const token = store.getState().userData.authToken;
   return async dispatch => {
     dispatch(requestJobsInProgress());
-
-    if (!token) {
-      dispatch(requestJobsError('You are not logged in'));
-    } else {
-      try {
-        const jobsResponse = await fetch(jobsFetchUrl, {
-          method: 'GET',
-          withCredentials: true,
-          credentials: 'include',
-          headers: {
-            authorization: token,
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-        });
-        const jobs = await jobsResponse.json();
-        dispatch(requestJobsSuccess(jobs));
-      } catch (err) {
-        console.log(err);
-        dispatch(requestJobsError(err));
-      }
+    try {
+      const jobsResponse = await fetch(jobsFetchUrl, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
+      const jobs = await jobsResponse.json();
+      dispatch(requestJobsSuccess(jobs));
+    } catch (err) {
+      dispatch(requestJobsError(err));
     }
   };
 }
@@ -80,7 +71,14 @@ export function requestJob(jobNo) {
   return async dispatch => {
     dispatch(requestJobInProgress());
     try {
-      const jobResponse = await fetch(jobFetchUrl);
+      const jobResponse = await fetch(jobFetchUrl, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
       const jobRequestData = await jobResponse.json();
       dispatch(requestJobSuccess(jobRequestData));
     } catch (e) {
@@ -114,7 +112,14 @@ export function requestClients() {
   return async dispatch => {
     dispatch(requestClientsInProgress());
     try {
-      const clientResponse = await fetch(clientFetchUrl);
+      const clientResponse = await fetch(clientFetchUrl, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
       const clients = await clientResponse.json();
       dispatch(requestClientsSuccess(clients));
     } catch (e) {
@@ -147,7 +152,14 @@ export function requestClient(clientId) {
   return async dispatch => {
     dispatch(requestClientInProgress());
     try {
-      const clientResponse = await fetch(clientFetchUrl);
+      const clientResponse = await fetch(clientFetchUrl, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
       const client = await clientResponse.json();
       dispatch(requestClientSuccess(client));
     } catch (e) {
@@ -182,17 +194,18 @@ export function requestSignIn(email, password) {
     try {
       const signInResponse = await fetch(signInUrl, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
       });
-      const responseBody = await signInResponse.json();
+      const { userId, username, status } = await signInResponse.json();
       if (signInResponse.status === 200) {
-        dispatch(requestSignInSuccess(responseBody.token));
+        dispatch(requestSignInSuccess(userId, username));
       } else {
-        dispatch(requestSignInError(responseBody));
+        dispatch(requestSignInError('err'));
       }
     } catch (err) {
       console.log(err.message);
@@ -213,9 +226,36 @@ function requestSignInError(error) {
   };
 }
 
-function requestSignInSuccess(token) {
+export function requestSignInSuccess(userId, username) {
   return {
     type: 'SIGNIN_REQUEST_SUCCESS',
-    token,
+    userId,
+    username,
+  };
+}
+
+export function checkLogin() {
+  const loginUrl = `${API_URL}/users/me`;
+  return async dispatch => {
+    dispatch(requestSignInInProgress());
+    try {
+      const response = await fetch(loginUrl, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.status === 200) {
+        const { userId, username } = await response.json();
+        dispatch(requestSignInSuccess(userId, username));
+      } else {
+        dispatch(requestSignInError(response.status));
+      }
+    } catch (err) {
+      console.log(err.message);
+      dispatch(requestSignInError('Error ' + err.message));
+    }
   };
 }

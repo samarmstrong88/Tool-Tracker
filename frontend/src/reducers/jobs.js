@@ -1,8 +1,8 @@
-const initalRequestJobsState = {
+const initalJobsState = {
   all: [],
 };
 
-const jobs = (state = initalRequestJobsState, action) => {
+const jobs = (state = initalJobsState, action) => {
   switch (action.type) {
     case 'JOBS_REQUEST_SUCCESS':
       return {

@@ -3,18 +3,24 @@ import jwt from 'jsonwebtoken';
 const initialRequestSignInState = {
   authToken: '',
   userId: '',
-  loggedIn: false,
+  loggedIn: null,
 };
 
 const userData = (state = initialRequestSignInState, action) => {
   switch (action.type) {
     case 'SIGNIN_REQUEST_SUCCESS':
-      const decoded = jwt.decode(action.token);
       return {
         ...state,
-        authToken: action.token,
-        userId: decoded.id,
+        userId: action.userId,
+        username: action.username,
         loggedIn: true,
+      };
+    case 'CHECK_LOGIN':
+      return {
+        ...state,
+        loggedIn: action.loggedIn,
+        userId: action.userId ? action.userId : '',
+        username: action.username ? action.username : '',
       };
     default:
       return state;

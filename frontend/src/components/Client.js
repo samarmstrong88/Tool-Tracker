@@ -20,11 +20,10 @@ class Client extends Component {
     return (
       <>
         <div className={styles.Client}>
-          <h3>Client</h3>
+          <h2>Client: {client.name}</h2>
         </div>
         <div className={styles.Client}>
-          <h3>{client.name}</h3>
-          <h2>Jobs</h2>
+          <h3>Jobs</h3>
           {client.jobs && client.jobs.map(job => <p>{job.job_no}</p>)}
         </div>
       </>

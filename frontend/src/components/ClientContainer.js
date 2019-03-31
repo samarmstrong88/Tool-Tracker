@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
+import React from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/actionCreators';
 import { requestClient } from '../actions/actionCreators';
-
 
 import Client from './Client';
 
@@ -17,7 +15,7 @@ const mapStateToProps = ({ client }) => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    requestClient: id => dispatch(requestClient(id))
+    requestClient: id => dispatch(requestClient(id)),
   };
 }
 
@@ -25,6 +23,5 @@ const ClientContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Client);
-
 
 export default ClientContainer;

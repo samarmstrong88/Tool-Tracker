@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { requestSignIn } from '../actions/actionCreators';
 import { Redirect } from 'react-router-dom';
+import styles from './styles/SignIn.scss';
 
 class SignIn extends Component {
   state = { email: '', password: '' };
 
   handleSubmit = e => {
-    console.log(e.target.email.value, e.target.password.value);
     this.props.requestSignIn(e.target.email.value, e.target.password.value);
     this.props.history.push('/jobs');
   };
@@ -21,7 +21,7 @@ class SignIn extends Component {
     return this.props.userData.loggedIn ? (
       <Redirect to="/jobs" />
     ) : (
-      <div>
+      <div className={styles.SignIn}>
         <h3>Sign In</h3>
         <form
           method="post"

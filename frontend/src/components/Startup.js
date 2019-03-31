@@ -7,8 +7,6 @@ import * as actionCreators from '../actions/actionCreators';
 
 class Startup extends Component {
   componentDidMount() {
-    this.props.requestJobs();
-    this.props.requestClients();
     this.props.checkLogin();
   }
 
@@ -17,9 +15,8 @@ class Startup extends Component {
   }
 }
 
-const mapStateToProps = ({ jobFilters, testFilter, jobs, clients }) => ({
+const mapStateToProps = ({ jobFilters, jobs, clients }) => ({
   jobFilters,
-  testFilter,
   jobs,
   clients,
 });

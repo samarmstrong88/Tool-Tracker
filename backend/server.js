@@ -35,6 +35,7 @@ app.use(function (req, res, next) {
 
 //Check for auth cookie and set current user
 app.use(function (req, res, next) {
+  console.log('ping');
   if (req.originalUrl === '/users/signin' || req.originalUrl === '/users/create') {
     next();
   }

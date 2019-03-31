@@ -15,12 +15,13 @@ const userData = (state = initialRequestSignInState, action) => {
         username: action.username,
         loggedIn: true,
       };
-    case 'CHECK_LOGIN':
+
+    case 'SIGNOUT_REQUEST_SUCCESS':
       return {
         ...state,
-        loggedIn: action.loggedIn,
-        userId: action.userId ? action.userId : '',
-        username: action.username ? action.username : '',
+        userId: null,
+        username: null,
+        loggedIn: false,
       };
     default:
       return state;

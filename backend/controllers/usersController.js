@@ -75,9 +75,19 @@ exports.signIn = async (req, res) => {
 exports.me = async (req, res) => {
   console.log(req.userId);
   if (!req.userId) res.sendStatus(401);
-  user = await User.findOne({_id: req.userId})
-  res.setHeader('Content-Type', 'application/json');
-  res.send({userId: user._id, username: user.username}  )
+  else{
+    user = await User.findOne({_id: req.userId})
+    res.setHeader('Content-Type', 'application/json');
+    res.send({userId: user._id, username: user.username})
+  }
+}
+
+exports.signOut = async (req, res) => {
+  if (!req.userId) res.status(200).send('You weren\'t logged in');
+  else {
+    res.clearCookie('authToken');
+    res.status(200).send('You are logged out');
+  }
 }
 
 // function generateJWT()

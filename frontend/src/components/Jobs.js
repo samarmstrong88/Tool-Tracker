@@ -12,7 +12,9 @@ class Jobs extends Component {
       selectedCategory: 'Warranty',
       statusList: ['to-be-started'],
     };
-    this.props.requestJobs();
+    if (!this.props.jobs.all) {
+      this.props.requestJobs();
+    }
   }
 
   handleStatusChange = e => {
@@ -28,7 +30,7 @@ class Jobs extends Component {
     }
   };
 
-  handleCategoryChange = e =>{
+  handleCategoryChange = e => {
     this.setState({ selectedCategory: e.target.value });
   };
 

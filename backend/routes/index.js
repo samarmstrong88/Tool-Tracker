@@ -27,6 +27,7 @@ router.post('/clients/add', clientsController.addClient);
 
 router.post('/users/create', usersController.createUser);
 router.post('/users/signin', usersController.signIn);
+router.post('/users/signout', usersController.signOut)
 router.get('/users/me', usersController.me);
 
 

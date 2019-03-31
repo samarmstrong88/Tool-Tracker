@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Timesheet from './Timesheet';
 import CreateTimesheet from './CreateTimesheet';
 import styles from './styles/Job.scss';
-
 
 class Job extends Component {
   state = {};
@@ -10,7 +10,14 @@ class Job extends Component {
   componentDidMount() {
     this.props.requestJob(this.props.match.params.job_no);
     (async () => {
-      const labour_types_raw = await fetch(`${API_URL}/jobs/labour_types`);
+      const labour_types_raw = await fetch(`${API_URL}/jobs/labour_types`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
       const labour_types = await labour_types_raw.json();
       this.setState({ labour_types });
     })();
@@ -23,18 +30,16 @@ class Job extends Component {
     }
   }
 
- 
-  
-
   deleteTimesheet = async _id => {
     const jobNo = this.props.job.jobData.job_no;
     const deleteUrl = `${API_URL}/job/${jobNo}/timesheet/${_id}`;
     const deleteConfig = {
       method: 'delete',
-      // headers: {
-      //   Accept: 'application/json',
-      //   'Content-Type': 'application/json',
-      // },
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
     };
     const res = await fetch(deleteUrl, deleteConfig);
     if (res.ok) {
@@ -73,15 +78,15 @@ class Job extends Component {
         </div>
         <div className={styles.TimeSheets}>
           <h2>Timesheets</h2>
-          <div className = {styles.TimesheetGrid} >
+          <div className={styles.TimesheetGrid}>
             {jobData.timesheets &&
               jobData.timesheets.map(timesheet => (
                 <Timesheet
-                timesheet={timesheet}
-                key={timesheet._id}
-                deleteTimesheet={this.deleteTimesheet}
+                  timesheet={timesheet}
+                  key={timesheet._id}
+                  deleteTimesheet={this.deleteTimesheet}
                 />
-                ))}
+              ))}
           </div>
           <CreateTimesheet {...this.props} labourTypes={labour_types} />
         </div>
@@ -90,4 +95,4 @@ class Job extends Component {
   }
 }
 
-export default Job;
+export default withRouter(Job);

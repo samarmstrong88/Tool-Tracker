@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Loader from 'react-loader-spinner';
 import PropTypes from 'prop-types';
 
 const PrivateRoute = ({
@@ -26,9 +25,9 @@ PrivateRoute.propTypes = {
   userData: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  userData: state.userData,
-  loadingStates: state.loadingStates,
+const mapStateToProps = ({ userData, loadingStates }) => ({
+  userData,
+  loadingStates,
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

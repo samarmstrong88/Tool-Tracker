@@ -1,0 +1,42 @@
+@import 'themes';
+@import 'card';
+@import 'buttons';
+
+
+.SignIn {
+  @include card
+  position: relative;
+  top: 20vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  
+
+  h3 {
+    text-transform: uppercase;
+    // color: $linkBlue;
+  }
+  form {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    justify-items: start;
+    grid-gap: 1rem;
+    margin: 2rem 0;
+    align-items: center;
+  }
+
+  input, textarea, select, option {
+    margin: 0.5rem;
+    display: block;
+    grid-column: 2 / 3;
+    width: auto;
+    border: 1px solid $midgrey;
+    padding: 1rem 1rem;
+    border-radius: 5px;
+  }
+  button {
+    @include buttons;
+    justify-self: center;
+  }
+}

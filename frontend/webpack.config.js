@@ -19,7 +19,6 @@ module.exports = {
     open: false,
     port: 3000,
     compress: true,
-    // https: true,
     proxy: {
       API_URL: {
         target: 'http://localhost:5000',
@@ -51,8 +50,11 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
+              name: '[path][name].[ext]',
+              context: path.resolve(__dirname, 'src/'),
               outputPath: './assets/',
+              publicPath: '../',
+              useRelativePaths: true,
             },
           },
         ],

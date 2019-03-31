@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styles from './styles/SearchBar.scss';
 import SearchResultsDropdown from './SearchResultsDropdown';
-import { requestClientsError } from '../actions/actionCreators';
 import { withRouter } from 'react-router-dom';
 // import { debounce } from 'throttle-debounce';
 

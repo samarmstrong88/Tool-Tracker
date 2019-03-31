@@ -1,25 +1,47 @@
-.h1 {
-  color: #151515;
-  margin: 0;
-  padding: 5px 0 5px 20px;
-  text-align: left;
-  font-size: 2.5rem;
-  margin-right: auto;
-  
-}
+@import 'buttons';
+@import 'themes';
+
 
 .Header {
-  
   box-shadow: 0px 0px 5px 0px #a17679;
-  background: linear-gradient(#ff091d, #e60013);
+  background-color: #ff091d;
   font-weight: bolder;
   top: 0;
   left: 0;
   position: relative;
-  
   z-index: 3;
   -ms-grid-area: header;
   grid-area: header;
+  & * {
+    margin: 0 1rem;
+  }
+  img {
+    margin-right: 0;
+  }
+
+  button {
+    @include buttons;
+    
+    background-color: #ff091d;
+    color: $black;
+    border: 2px solid $black;
+    padding: 0.2rem 0.5rem;
+    font-size: 1.2rem;
+    &:hover, &:focus {
+      color: $black;
+      background-color: $white;
+      border: 2px solid $black;
+    }
+  }
+  h1 {
+    color: $black;
+    margin: 0;
+    padding: 5px 0 5px 20px;
+    text-align: left;
+    font-size: 2.5rem;
+    margin-right: auto;
+    
+  }
 
 }
 
@@ -31,3 +53,5 @@
   align-content: space-between;
   align-items: center;
 }
+
+

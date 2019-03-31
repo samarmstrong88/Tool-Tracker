@@ -204,6 +204,8 @@ export function requestSignIn(email, password) {
       const { userId, username, status } = await signInResponse.json();
       if (signInResponse.status === 200) {
         dispatch(requestSignInSuccess(userId, username));
+        dispatch(requestJobs());
+        dispatch(requestClients());
       } else {
         dispatch(requestSignInError('err'));
       }
@@ -226,7 +228,7 @@ function requestSignInError(error) {
   };
 }
 
-export function requestSignInSuccess(userId, username) {
+function requestSignInSuccess(userId, username) {
   return {
     type: 'SIGNIN_REQUEST_SUCCESS',
     userId,
@@ -250,6 +252,8 @@ export function checkLogin() {
       if (response.status === 200) {
         const { userId, username } = await response.json();
         dispatch(requestSignInSuccess(userId, username));
+        dispatch(requestJobs());
+        dispatch(requestClients());
       } else {
         dispatch(requestSignInError(response.status));
       }
@@ -257,5 +261,48 @@ export function checkLogin() {
       console.log(err.message);
       dispatch(requestSignInError('Error ' + err.message));
     }
+  };
+}
+
+export function signOut() {
+  const logOutUrl = `${API_URL}/users/signout`;
+  return async dispatch => {
+    dispatch(requestSignOutInProgress());
+    try {
+      const response = await fetch(logOutUrl, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.status === 200) {
+        dispatch(requestSignOutSuccess());
+      } else {
+        dispatch(requestSignOutError(response.status));
+      }
+    } catch (err) {
+      dispatch(requestSignOutError('Error ' + err.message));
+    }
+  };
+}
+
+function requestSignOutInProgress() {
+  return {
+    type: 'SIGNOUT_REQUEST_IN_PROGRESS',
+  };
+}
+
+function requestSignOutError(error) {
+  return {
+    type: 'SIGNOUT_REQUEST_ERROR',
+    error,
+  };
+}
+
+function requestSignOutSuccess() {
+  return {
+    type: 'SIGNOUT_REQUEST_SUCCESS',
   };
 }

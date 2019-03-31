@@ -2,7 +2,7 @@ import '@babel/polyfill'; // Required for jest to be able to parse ES6+ code
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import store from './store';
 
@@ -28,22 +28,27 @@ export default class App extends Component {
               <>
                 <Header />
                 <Inner>
-                  <PrivateRoute
-                    path="/(|jobs)"
-                    exact
-                    component={JobsContainer}
-                  />
-                  <PrivateRoute path="/createjob/" component={CreateJob} />
-                  <PrivateRoute
-                    path="/createclient/"
-                    component={CreateClient}
-                  />
-                  <PrivateRoute path="/jobs/:job_no" component={JobContainer} />
-                  <PrivateRoute
-                    path="/clients/:clientId"
-                    component={ClientContainer}
-                  />
-                  <Route path="/signin/" component={SignIn} />
+                  <Switch>
+                    <PrivateRoute
+                      path="/(|jobs)"
+                      exact
+                      component={JobsContainer}
+                    />
+                    <PrivateRoute path="/createjob/" component={CreateJob} />
+                    <PrivateRoute
+                      path="/createclient/"
+                      component={CreateClient}
+                    />
+                    <PrivateRoute
+                      path="/jobs/:job_no"
+                      component={JobContainer}
+                    />
+                    <PrivateRoute
+                      path="/clients/:clientId"
+                      component={ClientContainer}
+                    />
+                    <Route path="/signin/" component={SignIn} />
+                  </Switch>
                 </Inner>
               </>
             </Router>
